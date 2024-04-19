@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Content Hub Public Upload Starter
+
+This is a starter project intended to help in the development of a publicly accessible upload capability for Sitecore Content Hub.
+
+**⚠️⚠️⚠️ This proof of concept application does not contain any security and should not be used outside of a closed environment without modification.⚠️⚠️⚠️**
 
 ## Getting Started
 
-First, run the development server:
+First, you must create an OAuth client in your Content Hub instance for this app to use. This can be done by going to `/en-us/admin/oauthclients`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Next, create a user that will be used for the actual uploading of the assets. It is best to have a dedicated user for this, so that assets uploaded via this app can be differentiated from others.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then configure the environment variables for this app via yur prefered method (E.G. `.env`, `.env.local`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable                | Example Value                             | Description                                                        |
+|-------------------------|-------------------------------------------|--------------------------------------------------------------------|
+| CH_BASE_URL             | https://my-instance.sitecoresandbox.cloud | The base url of your Content Hub instance                          |
+| CH_OAUTH_CLIENT_ID      | PublicUploadApp                           | The ClientId of the OAuth client you configured in Content Hub     |
+| CH_OAUTH_CLIENT_SECRECT | MySup3rS3cr3tK3y!                         | The ClientSecret of the OAuth client you configured in Content Hub |
+| CH_OAUTH_USERNAME       | PublicUploadUser                          | The Username of the user you created in Content Hub                |
+| CH_OAUTH_PASSWORD       | MySup3rS3cr3tP455w0rd!                    | The Password of the user you created in Content Hub                |
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Finally you can run the app using either `npm run start`, `npm run dev`, or using one of the pre-configured tasks in VSCode.
 
-## Learn More
+## Using the App
 
-To learn more about Next.js, take a look at the following resources:
+When opening the app, the users is presented with an upload screen to upload one, or multiple assets. These will be processed and uploaded to Content Hub. The description of the asset will be set to "Uploaded via Public Upload App in *path*", where *path* is the relative url of the page where the asset was uploaded, or "default". For example, if the user uploaded from `http://localhost:3000/my-campaign-folder`, the asset's description would be "Uploaded via Public Upload App in my-campaign-folder".
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚨 Important Considerations 🚨
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Let me re-iterate this:
 
-## Deploy on Vercel
+**⚠️⚠️⚠️ This proof of concept application does not contain any security and should not be used outside of a closed environment without modification.⚠️⚠️⚠️**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In practice allowing truly public access to your Content Hub instance is dangerous and should not be done. At the very least some form of authentication mechanism of must be added before use in the real world. You have been warned 🙂.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Additionally, the folder mechanism is purposely simple. In reality this should probably be either removed or extended such that the upload folders are linked to an entity in Content Hub, perhaps collections. If anyone feels like developing this, feel free to send a PR!
