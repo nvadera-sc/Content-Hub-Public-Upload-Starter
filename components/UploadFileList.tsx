@@ -18,8 +18,8 @@ export default function UploadFileList({ files } : { files: FileStatus[] }) {
 
     return (
         <ul className="divide-y">
-            {files?.sort(sortFiles).map(file => 
-                <li className="flex p-4 justify-between" key={file.file.webkitRelativePath}>
+            {files?.sort(sortFiles).map((file, i) => 
+                <li className="flex p-4 justify-between" key={file.file.name + i}>
                     <div>{file.file.name}</div>
                     <UploadFileStatusBadge status={file.status} />
                 </li>

@@ -6,12 +6,18 @@ import { uploadAsset } from "@/lib/uploadHelper"
 
 export const processUploadFile = async (formData: FormData) => {
     const file = formData.get(UploadActionFormDataKeys.file);
-    const assetId = await uploadAsset(file as File);
-    if(assetId) {
-        const path = formData.get(UploadActionFormDataKeys.path);
-        await updateDescriptionAsync(assetId, `Uploaded via Public Upload App in ${path}`);
+    try {
+        const assetId = await uploadAsset(file as File);
+        if(assetId) {
+            const path = formData.get(UploadActionFormDataKeys.path);
+            await updateDescriptionAsync(assetId, `Uploaded via Public Upload App in ${path}`);
 
-        return true;
+            return true;
+        }
+        return false;
     }
-    return false;
+    catch (e) {
+        console.warn("Exception occurred", e);
+        return false;
+    }
 }
