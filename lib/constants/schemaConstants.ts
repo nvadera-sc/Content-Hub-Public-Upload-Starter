@@ -1,6 +1,7 @@
 export const assetSchema = {
     properties: 
     {
-        description: "Description"
+        description: "Description",
+        isPublicUpload: "IsPublicUpload"
     }
 }

@@ -12,6 +12,7 @@ export const updateDescriptionAsync = async (assetId: number, description: strin
         return;
 
     asset.setPropertyValue(assetSchema.properties.description, description, defaultCulture);
+    asset.setPropertyValue(assetSchema.properties.isPublicUpload, true);
     
     await saveEntityAsync(asset);
 }
