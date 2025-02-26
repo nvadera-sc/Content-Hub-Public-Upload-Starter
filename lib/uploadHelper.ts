@@ -1,5 +1,5 @@
 import { getClient } from "./clientHelper";
-import { UploadAction, UploadConfiguration, UploadFinaliseUrl, UploadFormDataFileKey, UploadRequestResponseHeaderLocation, UploadRequestUrl } from "./constants/apiConstants";
+import { uploadAction, uploadConfiguration, uploadFinalizeUrl, uploadFormDataFileKey, uploadRequestResponseHeaderLocation, uploadRequestUrl } from "./constants/apiConstants";
 
 export const uploadAsset = async (file: File) => 
 {
@@ -11,7 +11,7 @@ export const uploadAsset = async (file: File) =>
     if(!uploadStatus)
         return null;
 
-    const assetId = finaliseUpload(uploadRequest.content);
+    const assetId = finalizeUpload(uploadRequest.content);
     if(!assetId)
         return null;
 
@@ -24,26 +24,26 @@ const getUploadUrl = async (file: File) =>
         file_name: file.name,
         file_size: file.size,
         upload_configuration: {
-            name: UploadConfiguration.AssetUpload
+            name: uploadConfiguration.AssetUpload
         },
         action: {
-            name: UploadAction.NewAsset
+            name: uploadAction.NewAsset
         }
     };
 
     const client = await getClient();
-    const response = await client.raw.postAsync(UploadRequestUrl, uploadContent);
+    const response = await client.raw.postAsync(uploadRequestUrl, uploadContent);
     if(!response.isSuccessStatusCode)
         return null;
     return {
-        url: response.responseHeaders[UploadRequestResponseHeaderLocation],
+        url: response.responseHeaders[uploadRequestResponseHeaderLocation],
         content: response.content
     }
 }
 
 const processUpload = async (url: string, file: File) => {
     const formData = new FormData();
-    formData.append(UploadFormDataFileKey, file, file.name);
+    formData.append(uploadFormDataFileKey, file, file.name);
 
     const requestOptions = {
         method: "POST",
@@ -55,11 +55,11 @@ const processUpload = async (url: string, file: File) => {
         return false;
 
     const responseJson = await uploadResponse.json();
-    return responseJson.success ? true : false;
+    return responseJson.success;
 }
 
-const finaliseUpload = async (finaliseBody: any) => {
+const finalizeUpload = async (finalizeBody: any) => {
     const client = await getClient();
-    const response = await client.raw.postAsync(UploadFinaliseUrl, finaliseBody);
+    const response = await client.raw.postAsync(uploadFinalizeUrl, finalizeBody);
     return response.isSuccessStatusCode ? (response.content as any).asset_id : false;
 }
