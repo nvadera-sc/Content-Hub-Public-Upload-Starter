@@ -1,7 +1,7 @@
 export type FileStatus = {
 		file: File,
 		status: Status,
-		message: string
+		message?: string
 }
 
 export enum Status {

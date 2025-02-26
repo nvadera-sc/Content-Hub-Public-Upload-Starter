@@ -9,6 +9,6 @@ export const getCachedValueAsync = async <T>(key: string, getValueAsyncFunc: () 
         return cachedValue as T;
     }
     const fallbackValue = await getValueAsyncFunc();
-    cache.set(key, fallbackValue, ttl || stdTTL);
+    cache.set(key, fallbackValue, ttl ?? stdTTL);
     return fallbackValue;
 }

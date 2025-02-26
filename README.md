@@ -30,7 +30,11 @@ Finally you can run the app using either `npm run start`, `npm run dev`, or usin
 
 ## Using the App
 
-When opening the app, the users is presented with an upload screen to upload one, or multiple assets. These will be processed and uploaded to Content Hub. The description of the asset will be set to "Uploaded via Public Upload App in *path*", where *path* is the relative url of the page where the asset was uploaded, or "default". For example, if the user uploaded from `http://localhost:3000/my-campaign-folder`, the asset's description would be "Uploaded via Public Upload App in my-campaign-folder" and a new property 'IsPublicUpload' is set to true.
+When opening the app, the users is presented with an upload screen to upload one, or multiple assets. These will be processed and uploaded to Content Hub.
+
+The description of the asset will be set to "Uploaded via Public Upload App in *path*", where *path* is the relative url of the page where the asset was uploaded, or "default". For example, if the user uploaded from `http://localhost:3000/my-campaign-folder`, the asset's description would be "Uploaded via Public Upload App in my-campaign-folder" and a new property 'IsPublicUpload' is set to true.
+
+There is an option to upload to a specific collection. To enabled this you need to set *pathIsInviteToUploadToCollection* to true in page.tsx file. Then the path needs to contain the identifier of the target collection. For example, if the user uploaded from `http://localhost:3000/UMVo-vWKTqm0L7x0HDBQaA`, the asset will be uploaded to the collection with that identifier. When identifier is not found, upload will not be possible.
 
 ## 🚨 Important Considerations 🚨
 
