@@ -1,4 +1,5 @@
-export const UploadActionFormDataKeys = {
-    file: "file",
-    path: "path"
+export const uploadActionFormDataKeys = {
+		file: "file",
+		path: "path",
+		uploadToCollection: "uploadToCollection",
 }

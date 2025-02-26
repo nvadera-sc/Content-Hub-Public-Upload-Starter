@@ -1,14 +1,16 @@
-export const UploadRequestUrl = "/api/v2.0/upload"
-export const UploadFinaliseUrl = "/api/v2.0/upload/finalize"
+export const uploadRequestUrl = "/api/v2.0/upload"
+export const uploadFinalizeUrl = "/api/v2.0/upload/finalize"
 
-export const UploadRequestResponseHeaderLocation = "location";
+export const uploadRequestResponseHeaderLocation = "location";
 
-export const UploadConfiguration = {
+export const uploadConfiguration = {
     AssetUpload: "AssetUploadConfiguration"
 }
 
-export const UploadAction = {
+export const uploadAction = {
     NewAsset: "NewAsset"
 }
 
-export const UploadFormDataFileKey = "file";
+export const uploadFormDataFileKey = "file";
+
+export const standardContentRepositoryId = 734;
