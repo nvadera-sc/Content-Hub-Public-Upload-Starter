@@ -69,7 +69,7 @@ export default function UploadPage({ params } : { params: { path: string } }) {
 
       processFile(newProcessingFile!);
     }
-  }, [queuedFiles, processingFile])
+  }, [params.path, validateInvite, queuedFiles, processingFile, processFile])
 
   return (
     <>
