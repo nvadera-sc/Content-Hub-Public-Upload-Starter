@@ -32,6 +32,12 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+        env:
+          CH_BASE_URL: ${{ secrets.DB_HOST }}
+          CH_OAUTH_CLIENT_ID: ${{ secrets.CH_OAUTH_CLIENT_ID }}
+          CH_OAUTH_CLIENT_SECRET: ${{ secrets.CH_OAUTH_CLIENT_SECRET }}
+          CH_OAUTH_USERNAME: ${{ secrets.CH_OAUTH_USERNAME }}
+          CH_OAUTH_PASSWORD: ${{ secrets.CH_OAUTH_PASSWORD }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

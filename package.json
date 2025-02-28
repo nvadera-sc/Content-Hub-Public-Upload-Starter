@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sitecore/sc-contenthub-webclient-sdk": "^1.2.43",
-    "next": "14.1.4",
+    "@sitecore/sc-contenthub-webclient-sdk": "^1.2.8",
+    "next": "^15.2.0",
     "node-cache": "^5.1.2",
+    "public-upload-app": "file:",
     "react": "^18",
     "react-dom": "^18"
   },

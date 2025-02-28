@@ -59,17 +59,21 @@ export default function UploadPage({ params } : { params: { path: string } }) {
   }
 
   useEffect(() => {
-		validateInvite(params.path);
-    if(queuedFiles.length > 0 && processingFile === undefined)
-    {
-      const newProcessingFile = queuedFiles.pop();
+    const unwrapParams = async () => {
+      const unwrappedParams = await params;
+      validateInvite(unwrappedParams.path);
+      if(queuedFiles.length > 0 && processingFile === undefined)
+      {
+        const newProcessingFile = queuedFiles.pop();
 
-      setQueuedFiles(currentQueuedFiles => currentQueuedFiles.filter(f => f !== newProcessingFile));
-      setProcessingFile(newProcessingFile);
+        setQueuedFiles(currentQueuedFiles => currentQueuedFiles.filter(f => f !== newProcessingFile));
+        setProcessingFile(newProcessingFile);
 
-      processFile(newProcessingFile!);
-    }
-  }, [params.path, validateInvite, queuedFiles, processingFile, processFile])
+        processFile(newProcessingFile!);
+      }
+    };
+    unwrapParams();
+  }, [params, validateInvite, queuedFiles, processingFile, processFile])
 
   return (
     <>
