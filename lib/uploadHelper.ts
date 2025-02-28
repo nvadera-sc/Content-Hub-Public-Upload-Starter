@@ -18,7 +18,7 @@ export const uploadAsset = async (file: File) =>
     return assetId;
 }
 
-const getUploadUrl = async (file: File) => 
+const getUploadUrl = async (file: File) =>
 {
     const uploadContent = {
         file_name: file.name,
