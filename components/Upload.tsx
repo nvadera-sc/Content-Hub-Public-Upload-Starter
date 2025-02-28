@@ -1,7 +1,7 @@
 "use client"
 import { useRef, useState, DragEvent, ChangeEvent, useId } from "react"
 
-export default function Upload({ onFileAdded } : { onFileAdded: (file: File) => void }) {
+export default function Upload({ onFileAdded } : Readonly<{ onFileAdded: (file: File) => void }>) {
     const [dragActive, setDragActive] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const inputId = useId();

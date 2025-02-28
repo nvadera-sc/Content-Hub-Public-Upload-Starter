@@ -8,6 +8,12 @@ export const getEntityAsync = async (entityId: number, loadConfiguration?: IEnti
     return await client.entities.getAsync(entityId, loadConfiguration);
 }
 
+export const getEntityByIdentifierAsync = async (entityIdentifier: string, loadConfiguration?: IEntityLoadConfiguration) => 
+{
+    const client = await getClient();
+    return await client.entities.getAsync(entityIdentifier, loadConfiguration);
+}
+
 export const saveEntityAsync = async (entity: IEntity) =>
 {
     const client = await getClient();
