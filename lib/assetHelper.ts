@@ -13,28 +13,28 @@ export const updateAssetAsync = async (assetId: number, description: string, col
         return;
 
     const elc = new EntityLoadConfiguration(new CultureLoadOption([defaultCulture]),
-																						PropertyLoadOption.All,
-																						new RelationLoadOption([
-																							assetSchema.relations.contentRepositoryToAsset,
-																							assetSchema.relations.collectionToAsset
-																						]));
+                                            PropertyLoadOption.All,
+                                            new RelationLoadOption([
+                                              assetSchema.relations.contentRepositoryToAsset,
+                                              assetSchema.relations.collectionToAsset
+                                            ]));
 
-		const asset = await getEntityAsync(assetId, elc);
+    const asset = await getEntityAsync(assetId, elc);
     if(!asset)
         return;
 
     asset.setPropertyValue(assetSchema.properties.description, description, defaultCulture);
-		if (asset.properties.filter(p => p.name === assetSchema.properties.isPublicUpload).length > 0) {
-			asset.setPropertyValue(assetSchema.properties.isPublicUpload, true);
-		}
+    if (asset.properties.filter(p => p.name === assetSchema.properties.isPublicUpload).length > 0) {
+      asset.setPropertyValue(assetSchema.properties.isPublicUpload, true);
+    }
 
-		let contentRepo = asset.getRelation(assetSchema.relations.contentRepositoryToAsset);
-		contentRepo?.setIds([standardContentRepositoryId]);
+    let contentRepo = asset.getRelation(assetSchema.relations.contentRepositoryToAsset);
+    contentRepo?.setIds([standardContentRepositoryId]);
 
-		if (collectionId) {
-			let collection = asset.getRelation(assetSchema.relations.collectionToAsset);
-			collection?.setIds([collectionId]);
-		}
+    if (collectionId) {
+      let collection = asset.getRelation(assetSchema.relations.collectionToAsset);
+      collection?.setIds([collectionId]);
+    }
 
     await saveEntityAsync(asset);
 }
